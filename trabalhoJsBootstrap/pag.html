@@ -7,83 +7,173 @@
 	</head>
 	<body>
 
-		<div class="container">
-			<h1>Sistema de Controle de Alunos</h1>
-		</div>	
+		<div class="jumbotron text-center">
+			<h1 class="display-4" >Sistema de Controle de Alunos</h1>
+		</div>
 
 		<div class="container">
 			<div class="card border-primary ">
-			<h4 class="card-header bg-primary text-white">Formulário de alunos</h4>
-			<div class="card-body">
-			<form>		
-				<div class="form-row">
-					<div class="form-group col-md-4">
-					  <label for="inputMatricula">Matrícula</label>
-					  <input type="text" class="form-control" id="inputMatricula" placeholder="Adicione a matrícula do aluno">
-					</div>
-					<div class="form-group col-md-8">
-					  <label for="inputNome">Senha</label>
-					  <input type="text" class="form-control" id="inputNome" placeholder="Adicione o nome do aluno">
-					</div>
+				<h4 class="card-header bg-primary text-white">Formulário de alunos</h4>
+				<div class="card-body">
+					<form>		
+						<div class="form-row">
+							<div class="form-group col-md-4">
+					  			<label for="inputMatricula">Matrícula</label>
+					  			<input type="text" class="form-control" id="inputMatricula" placeholder="Adicione a matrícula do aluno">
+							</div>
+							<div class="form-group col-md-8">
+					  			<label for="inputNome">Nome</label>
+					  			<input type="text" class="form-control" id="inputNome" placeholder="Adicione o nome do aluno">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-4">
+					  			<label for="inputDataNascimento">Data de Nascimento</label>
+					  			<input type="date" class="form-control" id="inputDataNascimento" placeholder="dd/mm/aaaa">
+							</div>
+							<div class="form-group col-md-8">
+					  			<label for="inputEmail">Email</label>
+					  			<input type="email" class="form-control" id="inputEmail" placeholder="Adicione o email do aluno">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-1">
+					  			<label for="inputDDD">DDD</label>
+					  			<input type="text" class="form-control" id="inputDDD" placeholder="DDD">
+							</div>
+							<div class="form-group col-md-4">
+					  			<label for="inputTelefone">Telefone</label>
+					  			<input type="text" class="form-control" id="inputTelefone" placeholder="Adicione o telefone do aluno">
+							</div>
+						</div>	
+						<div class="form-group col-md-1">
+							<label for="inputOperadora">Operadora</label>
+							<select class="custom-select mr-sm-2" id="inputOperadora">
+					        	<option value="oi">oi</option>
+					        	<option value="tim">tim</option>
+					        	<option value="claro">claro</option>
+				      		</select>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label for="inputCampus">Campus</label>
+								<select class="custom-select mr-sm-2" id="inputCampus">
+				        			<option value="Pici">Pici</option>
+				        			<option value="Porangabusso">Porangabusso</option>
+				        			<option value="Benfica">Benfica</option>
+			      				</select>
+							</div>
+							<div class="form-group col-md-5">
+								<label for="inputCursos">Cursos</label>
+								<select class="custom-select mr-sm-2" id="inputCursos">
+							        <option value="1">1</option>
+							        <option value="2">2</option>
+							        <option value="3">3</option>
+						      	</select>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div class="form-row">
-					<div class="form-group col-md-4">
-					  <label for="inputDataNascimento">Data de Nascimento</label>
-					  <input type="text" class="form-control" id="inputDataNascimento" placeholder="dd/mm/aaaa">
-					</div>
-					<div class="form-group col-md-8">
-					  <label for="inputEmail">Email</label>
-					  <input type="email" class="form-control" id="inputEmail" placeholder="Adicione o email do aluno">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-1">
-					  <label for="inputDD">DDD</label>
-					  <input type="text" class="form-control" id="inputDD" placeholder="DDD">
-					</div>
-
-					<div class="form-group col-md-4">
-					  <label for="inputTelefone">Telefone</label>
-					  <input type="text" class="form-control" id="inputTelefone" placeholder="Adicione o telefone do aluno">
-					</div>
-					<div class="form-group col-md-1">
-						<label for="inputOperadora">Operadora</label>
-						<select class="custom-select mr-sm-2" id="inputOperadora">
-					        <option value="oi">oi</option>
-					        <option value="tim">tim</option>
-					        <option value="claro">claro</option>
-				      	</select>
-					</div>
+				<div class="card-footer text-right">
+					<button class="btn" type="submit" id="btnLimpar">Limpar</button>
+					<button class="btn" type="submit" id="btnInserir">Inserir</button>
 				</div>	
-
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label for="inputCampus">Campus</label>
-						<select class="custom-select mr-sm-2" id="inputCampus">
-					        <option value="Pici">Pici</option>
-					        <option value="Porangabusso">Porangabusso</option>
-					        <option value="Benfica">Benfica</option>
-				      	</select>
-					</div>
-					<div class="form-group col-md-5">
-						<label for="inputCursos">Cursos</label>
-						<select class="custom-select mr-sm-2" id="inputCursos">
-					        <option value="1">1</option>
-					        <option value="2">2</option>
-					        <option value="3">3</option>
-				      	</select>
-					</div>
-				</div>
-
-			</form>
-		</div>
-		<div class="card-footer text-right">
-			<button class="btn" type="submit">Limpar</button>
-			<button class="btn" type="submit">Inserir</button>
-		<div>	
-	</div>
+			</div>
 		</div>	
+		<div class = "container">
+			<table class="table" id="tabela">
+			  <thead class="thead-light">
+			    <tr>
+			      <th scope="col">Matrícula</th>
+			      <th scope="col">Nome</th>
+			      <th scope="col">Ações</th>
+			    </tr>
+			  </thead>
+			    <tbody id = "tt">
+				    <tr>
+				      <td colspan="3">Sem registros de alunos</td>
+				    </tr>
+				</tbody>
+			</table>
+		</div>	
+
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+
+		<script type="text/javascript">
+
+			function criarLinha(aluno){
+				var row = document.createElement('tr');
+				var cell = document.createElement('td');
+				cell.appendChild(document.createTextNode(aluno.matricula));
+				row.appendChild(cell);
+				document.getElementById('tt').appendChild(row);
+
+				cell = document.createElement('td');
+				cell.appendChild(document.createTextNode(aluno.nome));
+				row.appendChild(cell);
+				document.getElementById('tt').appendChild(row);
+
+				cell = document.createElement('td');
+				var g = document.createElement("button");
+				g.setAttribute("class","btn-danger")
+				g.innerHTML = 'Remover';
+				g.style.width = '75px'; // setting the width to 200px
+				g.style.height = '25px';
+				//g.setAttribute('onclick','removerAluno()'); 
+				//g.setAttribute("data-toggle","modal");
+				//g.setAttribute("data-target","#modalExemplo");
+				cell.appendChild(g);
+				row.appendChild(cell);
+				document.getElementById('tt').appendChild(row);
+			}
+
+			function ordenarPorMatricula(aluno1, aluno2){
+				return aluno1.matricula - aluno2.matricula;
+			}
+
+
+			function atualizarTabela(){
+				
+				if(alunos.length == 0){
+					document.getElementById('tt').deleteRow(0);
+				}
+				
+				var tableBody = document.getElementById('tt')
+				
+				var aluno = new Object();
+
+				aluno['matricula'] = document.getElementById('inputMatricula').value;
+				aluno['nome'] = document.getElementById('inputNome').value;
+				aluno['nascimento'] = document.getElementById('inputDataNascimento').value;
+				aluno['email'] = document.getElementById('inputEmail').value;
+				aluno['ddd'] = document.getElementById('inputDDD').value;
+				aluno['telefone'] = document.getElementById('inputTelefone').value;
+				aluno['operadora'] = document.getElementById('inputOperadora').value;
+				aluno['campus'] = document.getElementById('inputCampus').value;
+				aluno['curso'] = document.getElementById('inputCursos').value;
+
+				alunos.push(aluno);
+
+				alunos.sort(ordenarPorMatricula);
+
+				var linhas = document.querySelectorAll("tbody tr");			
+
+				linhas.forEach(linha => linha.parentNode.removeChild(linha));
+
+				alunos.forEach(criarLinha);
+
+			}
+
+			function removerAluno(){
+			}
+
+			var alunos = new Array();
+
+			var inserir = document.getElementById('btnInserir');
+			inserir.onclick = atualizarTabela;
 		
+		</script>		
 	</body>
 <!DOCTYPE html>
 </html>
