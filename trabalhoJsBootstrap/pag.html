@@ -19,7 +19,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-4">
 					  			<label for="inputMatricula">Matrícula</label>
-					  			<input type="text" class="form-control" id="inputMatricula" placeholder="Adicione a matrícula do aluno">
+					  			<input type="number" class="form-control" id="inputMatricula" placeholder="Adicione a matrícula do aluno">
 							</div>
 							<div class="form-group col-md-8">
 					  			<label for="inputNome">Nome</label>
@@ -78,8 +78,31 @@
 					<button class="btn" type="submit" id="btnLimpar">Limpar</button>
 					<button class="btn" type="submit" id="btnInserir">Inserir</button>
 				</div>	
+			</div>	
+		</div>
+
+		<div class="container">
+			<div class="modal" tabindex="-1" role="dialog" id="modalConfirmacao">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Solicitação de confirmação</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p>Deseja excluir o aluno?</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id ="removerOk" class="btn btn-primary">confirmar</button>
+			        <button type="button" id ="removerCancelar" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+			      </div>
+			    </div>
+			  </div>
 			</div>
 		</div>	
+
 		<div class = "container">
 			<table class="table" id="tabela">
 			  <thead class="thead-light">
@@ -97,8 +120,7 @@
 			</table>
 		</div>	
 
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.min.js"></script>
+		
 
 		<script type="text/javascript">
 
@@ -120,9 +142,7 @@
 				g.innerHTML = 'Remover';
 				g.style.width = '75px'; // setting the width to 200px
 				g.style.height = '25px';
-				//g.setAttribute('onclick','removerAluno()'); 
-				//g.setAttribute("data-toggle","modal");
-				//g.setAttribute("data-target","#modalExemplo");
+				g.setAttribute('onclick',"removerAluno("+aluno.matricula+")"); 
 				cell.appendChild(g);
 				row.appendChild(cell);
 				document.getElementById('tt').appendChild(row);
@@ -133,7 +153,7 @@
 			}
 
 
-			function atualizarTabela(){
+			function InserirAluno(){
 				
 				if(alunos.length == 0){
 					document.getElementById('tt').deleteRow(0);
@@ -165,13 +185,62 @@
 
 			}
 
-			function removerAluno(){
+
+			function removerAluno(matricula){
+				var modal = document.getElementById('modalConfirmacao');
+				modal.style.display = "block";
+
+				window.onclick = function(event) {
+  					if (event.target == modal) {
+    					modal.style.display = "none";
+  					}
+				}	
+
+				var cancelar = document.getElementById('removerCancelar');
+				cancelar.onclick = function() {
+  					modal.style.display = "none";
+				}
+
+				var remover = document.getElementById('removerOk');
+				remover.onclick = function() {
+
+					var index;
+
+					var i;
+					for(i = 0; i < alunos.length; i++){
+						if (alunos[i].matricula == matricula){
+							index = i;
+							i = alunos.length;
+						}
+					}
+
+					alunos.splice(index, 1);
+					
+					alunos.sort(ordenarPorMatricula);
+
+					var linhas = document.querySelectorAll("tbody tr");			
+
+					linhas.forEach(linha => linha.parentNode.removeChild(linha));
+
+					alunos.forEach(criarLinha);
+
+					modal.style.display = "none";
+
+					if(alunos.length == 0){
+						var row = document.createElement('tr');
+						var cell = document.createElement('td');
+						cell.appendChild(document.createTextNode("Sem registros de alunos"));
+						row.appendChild(cell);
+						document.getElementById('tt').appendChild(row);
+					}
+				} 			
+
 			}
 
 			var alunos = new Array();
 
 			var inserir = document.getElementById('btnInserir');
-			inserir.onclick = atualizarTabela;
+			inserir.onclick = InserirAluno;
 		
 		</script>		
 	</body>
