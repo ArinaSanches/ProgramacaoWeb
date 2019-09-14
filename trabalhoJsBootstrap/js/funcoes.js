@@ -20,6 +20,7 @@ function criarLinha(aluno){
 	cell.appendChild(g);
 	row.appendChild(cell);
 	document.getElementById('tt').appendChild(row);
+
 }
 
 function ordenarPorMatricula(aluno1, aluno2){
@@ -29,34 +30,40 @@ function ordenarPorMatricula(aluno1, aluno2){
 
 function InserirAluno(){
 	
-	if(alunos.length == 0){
-		document.getElementById('tt').deleteRow(0);
-	}
-	
-	var tableBody = document.getElementById('tt')
-	
-	var aluno = new Object();
 
-	aluno['matricula'] = document.getElementById('inputMatricula').value;
-	aluno['nome'] = document.getElementById('inputNome').value;
-	aluno['nascimento'] = document.getElementById('inputDataNascimento').value;
-	aluno['email'] = document.getElementById('inputEmail').value;
-	aluno['ddd'] = document.getElementById('inputDDD').value;
-	aluno['telefone'] = document.getElementById('inputTelefone').value;
-	aluno['operadora'] = document.getElementById('inputOperadora').value;
-	aluno['campus'] = document.getElementById('inputCampus').value;
-	aluno['curso'] = document.getElementById('inputCursos').value;
+	if(document.getElementById('formulario').checkValidity()){
+     	if(alunos.length == 0){
+			document.getElementById('tt').deleteRow(0);
+		}
+		
+		var tableBody = document.getElementById('tt')
+		
+		var aluno = new Object();
 
-	alunos.push(aluno);
+		aluno['matricula'] = document.getElementById('inputMatricula').value;
+		aluno['nome'] = document.getElementById('inputNome').value;
+		aluno['nascimento'] = document.getElementById('inputDataNascimento').value;
+		aluno['email'] = document.getElementById('inputEmail').value;
+		aluno['ddd'] = document.getElementById('inputDDD').value;
+		aluno['telefone'] = document.getElementById('inputTelefone').value;
+		aluno['operadora'] = document.getElementById('inputOperadora').value;
+		aluno['campus'] = document.getElementById('inputCampus').value;
+		aluno['curso'] = document.getElementById('inputCursos').value;
 
-	alunos.sort(ordenarPorMatricula);
+		alunos.push(aluno);
 
-	var linhas = document.querySelectorAll("tbody tr");			
+		alunos.sort(ordenarPorMatricula);
 
-	linhas.forEach(linha => linha.parentNode.removeChild(linha));
+		var linhas = document.querySelectorAll("tbody tr");			
 
-	alunos.forEach(criarLinha);
+		linhas.forEach(linha => linha.parentNode.removeChild(linha));
 
+		alunos.forEach(aluno => criarLinha(aluno));	
+
+		console.log("oi");
+
+		return false;
+	}	
 }
 
 
@@ -129,9 +136,11 @@ function exibirInfoAutor(){
 
 var alunos = new Array();
 
+var ajuda = document.getElementById('ajuda');
+ajuda.onclick = exibirInfoAutor;
+
 var inserir = document.getElementById('btnInserir');
 inserir.onclick = InserirAluno;
 
-var ajuda = document.getElementById('ajuda');
-ajuda.onclick = exibirInfoAutor;
+
 
