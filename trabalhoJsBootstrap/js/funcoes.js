@@ -27,11 +27,50 @@ function ordenarPorMatricula(aluno1, aluno2){
 	return aluno1.matricula - aluno2.matricula;
 }
 
+function exibirInfoMatricula(){
+
+	var modal = document.getElementById('modalMatricula');
+	modal.style.display = "block";	
+	
+	document.getElementById("inputMatricula").focus();
+
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			document.getElementById('inputMatricula').value='';
+			modal.style.display = "none";
+		}
+	}	
+
+	var cancelar = document.getElementById('btnFechar');
+	cancelar.onclick = function() {
+		document.getElementById('inputMatricula').value='';
+		modal.style.display = "none";
+	}
+}
+
+
+function validarMatricula(){
+	var matricula = document.getElementById('inputMatricula').value;
+	console.log(matricula)
+
+	var i;
+	var controle = "valido";
+
+	for(i = 0; i < alunos.length; i++){
+		if (alunos[i].matricula == matricula){
+			exibirInfoMatricula();
+			controle = "invalido";
+		}
+	}
+	return controle;
+}
 
 function InserirAluno(){
 	
+	//var validacao = validarMatricula();
 
 	if(document.getElementById('formulario').checkValidity()){
+     	if(validarMatricula() == "valido"){
      	if(alunos.length == 0){
 			document.getElementById('tt').deleteRow(0);
 		}
@@ -58,12 +97,13 @@ function InserirAluno(){
 
 		linhas.forEach(linha => linha.parentNode.removeChild(linha));
 
-		alunos.forEach(aluno => criarLinha(aluno));	
-
+		alunos.forEach(aluno => criarLinha(aluno));
+		}
 		console.log("oi");
-
-		return false;
+		return false;	
 	}	
+
+		
 }
 
 
