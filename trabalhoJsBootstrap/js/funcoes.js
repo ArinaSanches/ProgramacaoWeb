@@ -18,7 +18,6 @@ function criarLinha(aluno){
 	cell.appendChild(g);
 	row.appendChild(cell);
 	document.getElementById('tt').appendChild(row);
-
 }
 
 function ordenarPorMatricula(aluno1, aluno2){
@@ -52,7 +51,6 @@ function exibirInfoMatricula(){
 	}
 
 }
-
 
 function validarMatricula(){
 	var matricula = document.getElementById('inputMatricula').value;
@@ -106,9 +104,7 @@ function InserirAluno(){
 		}
 		console.log("oi");
 		return false;	
-	}	
-
-		
+	}			
 }
 
 
@@ -200,6 +196,16 @@ function atualizarOpc(){
 	} 	
 }
 
+function limparDados(){
+
+	document.getElementById('inputMatricula').value = "";
+	document.getElementById('inputNome').value = "";
+	document.getElementById('inputDataNascimento').value = "";
+	document.getElementById('inputEmail').value = "";
+	document.getElementById('inputDDD').value = "";
+	document.getElementById('inputTelefone').value = "";
+}
+
 var alunos = new Array();
 
 var cursosCampus = {
@@ -216,6 +222,9 @@ ajuda.onclick = exibirInfoAutor;
 
 var inserir = document.getElementById('btnInserir');
 inserir.onclick = InserirAluno;
+
+var limpar = document.getElementById('btnLimpar');
+limpar.onclick = limparDados;
 
 
 
