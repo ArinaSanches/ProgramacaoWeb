@@ -14,8 +14,6 @@ function criarLinha(aluno){
 	var g = document.createElement("button");
 	g.setAttribute("class","btn-danger")
 	g.innerHTML = 'Remover';
-	g.style.width = '75px'; // setting the width to 200px
-	g.style.height = '25px';
 	g.setAttribute('onclick',"removerAluno("+aluno.matricula+")"); 
 	cell.appendChild(g);
 	row.appendChild(cell);
@@ -46,6 +44,13 @@ function exibirInfoMatricula(){
 		document.getElementById('inputMatricula').value='';
 		modal.style.display = "none";
 	}
+
+	var cancelar = document.getElementById("closeMat");
+	cancelar.onclick = function() {
+		document.getElementById('inputMatricula').value='';
+		modal.style.display = "none";
+	}
+
 }
 
 
@@ -122,6 +127,11 @@ function removerAluno(matricula){
 			modal.style.display = "none";
 	}
 
+	var cancelar = document.getElementById('closeConf');
+	cancelar.onclick = function() {
+			modal.style.display = "none";
+	}
+
 	var remover = document.getElementById('removerOk');
 	remover.onclick = function() {
 
@@ -159,6 +169,7 @@ function removerAluno(matricula){
 }
 
 function exibirInfoAutor(){
+	console.log(cursosCampus);
 	var modal = document.getElementById('modalAjuda');
 	modal.style.display = "block";
 
@@ -172,9 +183,33 @@ function exibirInfoAutor(){
 	cancelar.onclick = function() {
 		modal.style.display = "none";
 	}
+
+	var cancelar = document.getElementById('closeAjuda');
+	cancelar.onclick = function() {
+		modal.style.display = "none";
+	}
+}
+
+function atualizarOpc(){
+	var campus = document.getElementById('inputCampus').value
+
+	var cursos = document.querySelectorAll("#inputCursos option");
+	var i;
+	for(i = 0; i < 3; i++){
+		cursos[i].innerHTML = cursosCampus[campus][i];
+	} 	
 }
 
 var alunos = new Array();
+
+var cursosCampus = {
+	"Pici" : ["Computação", "Matemática", "Geologia"],
+	"Benfica": ["Letras", "Filosofia", "Direito"],
+	"Porangabusso" : ["Medicina", "Odontologia", "Farmácia"]
+}
+
+var campus = document.getElementById('inputCampus');
+campus.addEventListener("change", atualizarOpc);
 
 var ajuda = document.getElementById('ajuda');
 ajuda.onclick = exibirInfoAutor;

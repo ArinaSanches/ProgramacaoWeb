@@ -20,8 +20,8 @@
 		</div>
 
 		<div class="container">
-			<div class="card border-primary ">
-				<h4 class="card-header bg-primary text-white">Formulário de alunos</h4>
+			<div class="card">
+				<h4 class="card-header text-white" id = "cabecalhoForm">Formulário de alunos</h4>
 				<div class="card-body">
 					<form id = "formulario">		
 						<div class="form-row">
@@ -53,15 +53,15 @@
 					  			<label for="inputTelefone">Telefone</label>
 					  			<input type="text" class="form-control" id="inputTelefone" placeholder="Adicione o telefone do aluno">
 							</div>
-						</div>	
-						<div class="form-group col-md-1">
+							<div class="form-group col-md-1">
 							<label for="inputOperadora">Operadora</label>
-							<select class="custom-select mr-sm-2" id="inputOperadora">
-					        	<option value="oi">oi</option>
-					        	<option value="tim">tim</option>
-					        	<option value="claro">claro</option>
-				      		</select>
-						</div>
+								<select class="custom-select mr-sm-2" id="inputOperadora">
+						        	<option value="oi">oi</option>
+						        	<option value="tim">tim</option>
+						        	<option value="claro">claro</option>
+					      		</select>
+							</div>
+						</div>						
 						<div class="form-row">
 							<div class="form-group col-md-2">
 								<label for="inputCampus">Campus</label>
@@ -74,26 +74,28 @@
 							<div class="form-group col-md-5">
 								<label for="inputCursos">Cursos</label>
 								<select class="custom-select mr-sm-2" id="inputCursos">
-							        <option value="1">1</option>
-							        <option value="2">2</option>
-							        <option value="3">3</option>
+							        <option value="1">Computação</option>
+							        <option value="2">Matemática</option>
+							        <option value="3">Geologia</option>
 						      	</select>
 							</div>
 						</div>
-						<button class="btn" type="submit" id="btnLimpar">Limpar</button>
-						<button class="btn" type="submit" id="btnInserir">Inserir</button>
+						<div id = btnRodape>
+							<button class="btn" type="submit" id="btnLimpar">Limpar</button>
+							<button class="btn" type="submit" id="btnInserir">Inserir</button>
+						</div>
 					</form>
 				</div>	
 			</div>	
 		</div>
 
-		<div class="container">
+		<div class="container" id="container-modals">
 			<div class="modal" tabindex="-1" role="dialog" id="modalConfirmacao">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title">Solicitação de confirmação</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button type="button" id = "closeConf" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -113,7 +115,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title">Autora</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button type="button" id = "closeAjuda" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -133,7 +135,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title">Matricula repetida!</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button type="button" id ="closeMat" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -152,11 +154,11 @@
 
 		<div class = "container">
 			<table class="table" id="tabela">
-			  <thead class="thead-light">
+			  <thead id = "Cabtabela">
 			    <tr>
-			      <th scope="col">Matrícula</th>
-			      <th scope="col">Nome</th>
-			      <th scope="col">Ações</th>
+			      <th id = "mat" scope="col">Matrícula</th>
+			      <th id = "nomeT" scope="col">Nome</th>
+			      <th id = "acoes" scope="col">Ações</th>
 			    </tr>
 			  </thead>
 			    <tbody id = "tt">
