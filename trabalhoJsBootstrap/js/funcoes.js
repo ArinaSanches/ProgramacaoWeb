@@ -206,6 +206,14 @@ function limparDados(){
 	document.getElementById('inputTelefone').value = "";
 }
 
+function mascara(){ 
+
+	var telefone = document.getElementById('inputTelefone');
+
+    if(telefone.value.length == 5)
+        telefone.value = telefone.value + '-'; 
+}
+
 var alunos = new Array();
 
 var cursosCampus = {
@@ -225,6 +233,10 @@ inserir.onclick = InserirAluno;
 
 var limpar = document.getElementById('btnLimpar');
 limpar.onclick = limparDados;
+
+var telefone = document.getElementById('inputTelefone');
+telefone.addEventListener("keyup",mascara);
+
 
 
 
