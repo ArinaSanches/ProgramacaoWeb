@@ -78,37 +78,38 @@ function InserirAluno(){
 
 	if(document.getElementById('formulario').checkValidity()){
      	if(validarMatricula() == "valido"){
-     	if(alunos.length == 0){
-			document.getElementById('tt').deleteRow(0);
-		}
-		
-		var tableBody = document.getElementById('tt')
-		
-		var aluno = new Object();
+	     	if(alunos.length == 0){
+				document.getElementById('tt').deleteRow(0);
+			}
+			
+			var tableBody = document.getElementById('tt')
+			
+			var aluno = new Object();
 
-		aluno['matricula'] = document.getElementById('inputMatricula').value;
-		aluno['nome'] = document.getElementById('inputNome').value;
-		aluno['nascimento'] = document.getElementById('inputDataNascimento').value;
-		aluno['email'] = document.getElementById('inputEmail').value;
-		aluno['ddd'] = document.getElementById('inputDDD').value;
-		aluno['telefone'] = document.getElementById('inputTelefone').value;
-		aluno['operadora'] = document.getElementById('inputOperadora').value;
-		aluno['campus'] = document.getElementById('inputCampus').value;
-		aluno['curso'] = document.getElementById('inputCursos').value;
+			aluno['matricula'] = document.getElementById('inputMatricula').value;
+			aluno['nome'] = document.getElementById('inputNome').value;
+			aluno['nascimento'] = document.getElementById('inputDataNascimento').value;
+			aluno['email'] = document.getElementById('inputEmail').value;
+			aluno['ddd'] = document.getElementById('inputDDD').value;
+			aluno['telefone'] = document.getElementById('inputTelefone').value;
+			aluno['operadora'] = document.getElementById('inputOperadora').value;
+			aluno['campus'] = document.getElementById('inputCampus').value;
+			aluno['curso'] = document.getElementById('inputCursos').value;
 
-		alunos.push(aluno);
+			alunos.push(aluno);
 
-		alunos.sort(ordenarPorMatricula);
+			alunos.sort(ordenarPorMatricula);
 
-		var linhas = document.querySelectorAll("tbody tr");			
+			var linhas = document.querySelectorAll("tbody tr");			
 
-		linhas.forEach(linha => linha.parentNode.removeChild(linha));
+			linhas.forEach(linha => linha.parentNode.removeChild(linha));
 
-		alunos.forEach(aluno => criarLinha(aluno));
+			alunos.forEach(aluno => criarLinha(aluno));
+			limparDados();
+
 		}
 
 		console.log("oi");
-		limparDados();
 		return false;	
 	}			
 }
@@ -263,11 +264,29 @@ function atualzarAluno(matricula){
 
 		inputMatricula.removeAttribute('readonly');
 
+		botao.onclick = InserirAluno;
+
+		botao.innerHTML = "Inserir";
+
+		return false;
+	}
+
+	var botaoLimpar = document.getElementById('btnLimpar');
+
+	botaoLimpar.onclick = function(){
+
+		limparDados();
+
+		inputMatricula.removeAttribute('readonly');
+
+		botao.onclick = InserirAluno;
+
 		botao.innerHTML = "Inserir";
 
 		return false;
 
-	}
+	} 
+
 	
 }
 
