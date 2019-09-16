@@ -2,11 +2,15 @@ function criarLinha(aluno){
 	var row = document.createElement('tr');
 	var cell = document.createElement('td');
 	cell.appendChild(document.createTextNode(aluno.matricula));
+	cell.setAttribute('onclick', 'atualzarAluno('+aluno.matricula+')');
+
 	row.appendChild(cell);
 	document.getElementById('tt').appendChild(row);
 
 	cell = document.createElement('td');
 	cell.appendChild(document.createTextNode(aluno.nome));
+	cell.setAttribute('onclick', 'atualzarAluno('+aluno.matricula+')');
+
 	row.appendChild(cell);
 	document.getElementById('tt').appendChild(row);
 
@@ -102,7 +106,9 @@ function InserirAluno(){
 
 		alunos.forEach(aluno => criarLinha(aluno));
 		}
+
 		console.log("oi");
+		limparDados();
 		return false;	
 	}			
 }
@@ -206,6 +212,65 @@ function limparDados(){
 	document.getElementById('inputTelefone').value = "";
 }
 
+function carregarDados(matricula, index){
+	var inputMatricula = document.getElementById('inputMatricula');
+	inputMatricula.value = matricula;
+	inputMatricula.setAttribute('readonly','true')
+
+	document.getElementById('inputNome').value = alunos[index].nome;
+	document.getElementById('inputDataNascimento').value = alunos[index].nascimento;
+	document.getElementById('inputEmail').value = alunos[index].email;
+	document.getElementById('inputDDD').value = alunos[index].ddd;
+	document.getElementById('inputTelefone').value = alunos[index].telefone;
+	document.getElementById('inputOperadora').value = alunos[index].operadora;
+	document.getElementById('inputCampus').value = alunos[index].campus;
+	document.getElementById('inputCursos').value = alunos[index].curso;
+
+}
+
+function atualzarAluno(matricula){
+	var index;
+	var i;
+	for(i = 0; i < alunos.length; i++){
+		if (alunos[i].matricula == matricula){
+			index = i;
+			i = alunos.length;
+		}
+	}
+
+	carregarDados(matricula, index);
+
+	var botao = document.getElementById('btnInserir'); 
+	botao.innerHTML = "Alterar";
+
+	botao.onclick = function(){
+		alunos[index].nome = document.getElementById('inputNome').value;
+		alunos[index].nascimento = document.getElementById('inputDataNascimento').value;
+		alunos[index].email = document.getElementById('inputEmail').value;
+		alunos[index].ddd = document.getElementById('inputDDD').value;
+		alunos[index].telefone = document.getElementById('inputTelefone').value;
+		alunos[index].operadora = document.getElementById('inputOperadora').value;
+		alunos[index].campus = document.getElementById('inputCampus').value;
+		alunos[index].curso = document.getElementById('inputCursos').value;
+
+		var linhas = document.querySelectorAll("tbody tr");			
+
+		linhas.forEach(linha => linha.parentNode.removeChild(linha));
+
+		alunos.forEach(criarLinha);
+
+		limparDados();
+
+		inputMatricula.removeAttribute('readonly');
+
+		botao.innerHTML = "Inserir";
+
+		return false;
+
+	}
+	
+}
+
 var alunos = new Array();
 
 var cursosCampus = {
@@ -225,6 +290,8 @@ inserir.onclick = InserirAluno;
 
 var limpar = document.getElementById('btnLimpar');
 limpar.onclick = limparDados;
+
+
 
 
 
