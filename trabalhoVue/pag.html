@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang ="pt">
+	<head>
+
+	    <meta charset="utf-8">
+
+		<title>Pagina</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/estilos.css" rel="stylesheet">
+
+	</head>
+	<body>
+		<img src="img/ajuda.png" class="rounded float-right" id = "ajuda"/>
+
+		<div class="jumbotron text-center">
+			<h1 class="display-4" >Sistema de Controle de Alunos</h1>
+		</div>
+
+		<div id="app">
+
+		<div class="container">
+			<div class="card">
+				<h4 class="card-header text-white" id = "cabecalhoForm">Formulário de alunos</h4>
+				<div class="card-body">
+					<form id = "formulario">		
+						<div class="form-row">
+							<div class="form-group col-md-4">
+					  			<label for="inputMatricula">Matrícula</label>
+					  			<input type="text" v-model="matricula" class="form-control" id="inputMatricula" placeholder="Adicione a matrícula do aluno" required pattern="[0-9]{6}" maxlength=6>
+							</div>
+							<div class="form-group col-md-8">
+					  			<label for="inputNome">Nome</label>
+					  			<input type="text" v-model="nome" class="form-control" id="inputNome" placeholder="Adicione o nome do aluno" required minlength="3">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-4">
+					  			<label for="inputDataNascimento">Data de Nascimento</label>
+					  			<input type="date" v-model="data" min="1925-01-01" max="2001-12-31" class="form-control" id="inputDataNascimento" placeholder="dd/mm/aaaa" required>
+							</div>
+							<div class="form-group col-md-8">
+					  			<label for="inputEmail">Email</label>
+					  			<input type="email" v-model="email" class="form-control" id="inputEmail" placeholder="Adicione o email do aluno" required>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-1">
+					  			<label for="inputDDD">DDD</label>
+					  			<input type="text" v-model="ddd" class="form-control" id="inputDDD" placeholder="DDD" required pattern="[0-9]{2}" maxlength=2>
+							</div>
+							<div class="form-group col-md-4">
+					  			<label for="inputTelefone">Telefone</label>
+					  			<input type="text" v-model="telefone" class="form-control" id="inputTelefone" placeholder="Adicione o telefone do aluno" required pattern="^[0-9]{5}-([0-9]{3}|[0-9]{4})">
+							</div>
+							<div class="form-group col-md-1">
+							<label for="inputOperadora">Operadora</label>
+								<select class="custom-select mr-sm-2" id="inputOperadora" v-model="operadora">
+						        	<option value="oi">oi</option>
+						        	<option value="tim">tim</option>
+						        	<option value="claro">claro</option>
+					      		</select>
+							</div>
+						</div>						
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label for="inputCampus">Campus</label>
+								<select class="custom-select mr-sm-2" id="inputCampus" v-model="campus">
+				        			<option v-for="option in opcCampus" :value="option">{{option}} </option>
+			      				</select>
+							</div>
+							<div class="form-group col-md-5">
+								<label for="inputCursos">Cursos</label>
+								<select class="custom-select mr-sm-2" id="inputCursos" v-model="curso">
+									<option v-if="campus == 'Pici'" v-for="option in opcPici">
+										{{option}}
+									</option>
+									<option v-if="campus == 'Porangabusso'" v-for="option in opcPorangabusso">
+										{{option}}
+									</option>
+									<option v-if="campus == 'Benfica'" v-for="option in opcBenfica">
+										{{option}}
+									</option>
+						      	</select>
+							</div>
+						</div>
+						<div id = btnRodape>
+							<button class="btn" type="submit" id="btnLimpar">Limpar</button>
+							<button class="btn" type="submit" id="btnInserir">Inserir</button>
+						</div>
+					</form>
+				</div>	
+			</div>	
+		</div>
+
+		<div class="container" id="container-modals">
+			<div class="modal" tabindex="-1" role="dialog" id="modalConfirmacao">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Solicitação de confirmação</h5>
+			        <button type="button" id = "closeConf" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p>Deseja excluir o aluno?</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id ="removerOk" class="btn btn-primary">confirmar</button>
+			        <button type="button" id ="removerCancelar" class="btn btn-secondary" data-dismiss="modal">cancelar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<div class="modal" tabindex="-1" role="dialog" id="modalAjuda">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Autora</h5>
+			        <button type="button" id = "closeAjuda" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      	<img src="img/gira.png" class="float-left" id = "foto"/>
+			        <p>Arina de Jesus A. M. Sanches de Cabo Verde.</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id ="fechar" class="btn btn-primary">fechar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+			<div class="modal" tabindex="-1" role="dialog" id="modalMatricula">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">Matricula repetida!</h5>
+			        <button type="button" id ="closeMat" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p>Já existe um aluno cadastrado com esse número de matricula.</p>
+			        <p>Digite um número de matricula diferente.</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id ="btnFechar" class="btn btn-primary">fechar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+		</div>	
+
+		<div class = "container">
+			<table class="table" id="tabela">
+			  <thead id = "Cabtabela">
+			    <tr>
+			      <th id = "mat" scope="col">Matrícula</th>
+			      <th id = "nomeT" scope="col">Nome</th>
+			      <th id = "acoes" scope="col">Ações</th>
+			    </tr>
+			  </thead>
+			    <tbody id = "tt">
+				    <tr>
+				      <td colspan="3">Sem registros de alunos</td>
+				    </tr>
+				</tbody>
+			</table>
+		</div>		
+
+			<p> {{matricula}} </p>
+			<p> {{nome}} </p>
+			<p> {{data}} </p>
+			<p> {{email}} </p>
+			<p> {{ddd}} </p>
+			<p> {{telefone}} </p>
+			<p> {{operadora}} </p>
+			<p> {{campus}} </p>
+			<p> {{curso}} </p>
+
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+		
+		<script>
+			var app = new Vue({
+				el: "#app",
+				data: {
+					matricula: "",
+					nome: "",
+					data: "",
+					email: "",
+					ddd: "",
+					telefone: "",
+					operadora: "",
+					campus: "",
+					curso: "",
+					opcCampus: ["Pici", "Porangabusso", "Benfica"],
+					opcPici: ["Computação", "Matemática", "Geologia"],
+					opcBenfica: ["Letras", "Filosofia", "Direito"],
+					opcPorangabusso : ["Medicina", "Odontologia", "Farmácia"]
+				}
+			});
+		</script>	
+
+		<!--<script src="js/funcoes.js"></script>-->	
+
+	</body>
+<!DOCTYPE html>
+</html>
