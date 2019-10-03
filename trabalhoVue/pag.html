@@ -95,7 +95,7 @@
 							</div>
 
 							<div id = btnRodape>
-								<button class="btn" id="btnLimpar" type="submit">Limpar</button>	
+								<button class="btn" id="btnLimpar" type="submit" v-on:click="limparCampus">Limpar</button>	
 								<button class="btn" id="btnInserir" type="submit" v-on:click="adicionar" >Inserir</button>
 							</div>
 						</form>
@@ -233,6 +233,18 @@
 					ordenarPorMatricula(aluno1, aluno2){
 						return aluno1.matricula - aluno2.matricula;
 					},
+					limparCampus(){
+						this.matricula = ""
+						this.nome = ""
+						this.data = ""
+						this.email = ""
+						this.ddd = ""
+						this.telefone =""
+						this.operadora =""
+						this.campus =""
+						this.curso =""
+						event.preventDefault()
+					},
 	                adicionar($event) {
 	                    let aluno = {}
 
@@ -251,6 +263,7 @@
 						        aluno.curso =this.curso
 						        this.alunos.push(aluno)
 						        this.alunos.sort(this.ordenarPorMatricula)
+						        this.limparCampus()
 					    	}
 					    	event.preventDefault()
 					        return false;
