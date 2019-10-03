@@ -96,7 +96,7 @@
 
 							<div id = btnRodape>
 								<button class="btn" id="btnLimpar" type="submit">Limpar</button>	
-								<button class="btn" id="btnInserir" type="button" v-on:click="adicionar" >Inserir</button>
+								<button class="btn" id="btnInserir" type="submit" v-on:click="adicionar" >Inserir</button>
 							</div>
 						</form>
 					</div>	
@@ -144,31 +144,33 @@
 				    </div>
 				  </div>
 				</div>
+
+				<div class="modal" tabindex="-1" role="dialog" id="modalMatricula" ref="modalMatriculaRef">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">Matricula repetida!</h5>
+				        <button type="button" id ="closeMat" class="close" data-dismiss="modal" aria-label="Close" v-on:click="fecharModalMatricula">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <p>Já existe um aluno cadastrado com esse número de matricula.</p>
+				        <p>Digite um número de matricula diferente.</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" id ="btnFechar" class="btn btn-primary" v-on:click="fecharModalMatricula">fechar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 			</div>
 
 		</div>
 
 		<div class="container" id="container-modals">
 			
-			<div class="modal" tabindex="-1" role="dialog" id="modalMatricula">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title">Matricula repetida!</h5>
-			        <button type="button" id ="closeMat" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        <p>Já existe um aluno cadastrado com esse número de matricula.</p>
-			        <p>Digite um número de matricula diferente.</p>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" id ="btnFechar" class="btn btn-primary">fechar</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+			
 
 		</div>	
 
@@ -236,19 +238,22 @@
 
 	                    if(this.$refs.form.checkValidity()){
 
-               				aluno.matricula = this.matricula;
-		                    aluno.nome = this.nome
-					        aluno.data = this.data
-					        aluno.email = this.email
-					        aluno.ddd =this.ddd
-					        aluno.telefone = this.telefone
-					        aluno.operadora = this.operadora
-					        aluno.campus = this.campus
-					        aluno.curso =this.curso
-					        this.alunos.push(aluno)
-					        this.alunos.sort(this.ordenarPorMatricula)
-					        //event.preventDefault()
-					        //return false;
+	                    	if(this.validarMatricula() == "valido"){
+
+	               				aluno.matricula = this.matricula;
+			                    aluno.nome = this.nome
+						        aluno.data = this.data
+						        aluno.email = this.email
+						        aluno.ddd =this.ddd
+						        aluno.telefone = this.telefone
+						        aluno.operadora = this.operadora
+						        aluno.campus = this.campus
+						        aluno.curso =this.curso
+						        this.alunos.push(aluno)
+						        this.alunos.sort(this.ordenarPorMatricula)
+					    	}
+					    	event.preventDefault()
+					        return false;
 				    	}						
 	                }, 
 	                fecharModal($event){
@@ -256,6 +261,9 @@
 	                },
 	                fecharModalAjuda($event){
 	                	this.$refs.modalAjudaRef.style.display = "none";
+	                },
+	                fecharModalMatricula($event){
+	                	this.$refs.modalMatriculaRef.style.display = "none";
 	                },
 	                removerAluno(matricula){
 	                	let indice = this.indiceAluno(matricula);
@@ -276,6 +284,18 @@
 	                abrirModalAjuda(){
 	                	let element = this.$refs.modalAjudaRef
     					element.style.display = "block";
+	                },
+	                validarMatricula(){
+	                	var i;
+						var controle = "valido";
+
+						for(i = 0; i < alunos.length; i++){
+							if (alunos[i].matricula == this.matricula){
+								this.$refs.modalMatriculaRef.style.display = "block"
+								controle = "invalido";
+							}
+						}
+						return controle;
 	                }
 	            }
 			});
