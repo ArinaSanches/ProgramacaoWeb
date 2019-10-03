@@ -18,15 +18,16 @@
 
 	</head>
 	<body>
-		<img src="img/ajuda.png" class="rounded float-right" id = "ajuda"/>
 
-		<div class="jumbotron text-center">
-			<h1 class="display-4" >Sistema de Controle de Alunos</h1>
-		</div>
+		<div id="app">
 
-		<div class="container">
+			<img src="img/help.png" class="rounded float-right" id = "ajuda" v-on:click="abrirModalAjuda"/>
 
-			<div id="app">
+			<div class="jumbotron text-center">
+				<h1 class="display-4" >Sistema de Controle de Alunos</h1>
+			</div>
+
+			<div class="container">
 				
 				<div class="card">
 					<h4 class="card-header text-white" id = "cabecalhoForm">Formulário de alunos</h4>
@@ -100,54 +101,55 @@
 						</form>
 					</div>	
 				</div>
-				<table-alunos :alunoslista="alunos"></table-alunos>
-
-				<div>
-					<div class="modal" tabindex="-1" role="dialog" id="modalConfirmacao" ref="modalConf">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title">Solicitação de confirmação</h5>
-					        <button type="button" id = "closeConf" class="close" data-dismiss="modal" aria-label="Close" v-on:click="fecharModal">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        <p>Deseja excluir o aluno?</p>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" id ="removerOk" class="btn btn-primary" ref="modalRemoverAluno">confirmar</button>
-					        <button type="button" id ="removerCancelar" class="btn btn-secondary" data-dismiss="modal" v-on:click="fecharModal">cancelar</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>	
+				<table-alunos :alunoslista="alunos"></table-alunos>	
 			</div>
+
+			<div>
+				<div class="modal" tabindex="-1" role="dialog" id="modalConfirmacao" ref="modalConf">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">Solicitação de confirmação</h5>
+				        <button type="button" id = "closeConf" class="close" data-dismiss="modal" aria-label="Close" v-on:click="fecharModal">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <p>Deseja excluir o aluno?</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" id ="removerOk" class="btn btn-primary" ref="modalRemoverAluno">confirmar</button>
+				        <button type="button" id ="removerCancelar" class="btn btn-secondary" data-dismiss="modal" v-on:click="fecharModal">cancelar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+				<div class="modal" tabindex="-1" role="dialog" id="modalAjuda" ref="modalAjudaRef">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">Autora</h5>
+				        <button type="button" id = "closeAjuda" class="close" data-dismiss="modal" aria-label="Close" v-on:click="fecharModalAjuda">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				      	<img src="img/gira.png" class="float-left" id = "foto"/>
+				        <p>Arina de Jesus A. M. Sanches de Cabo Verde.</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" id ="fechar" class="btn btn-primary" data-dismiss="modal" v-on:click="fecharModalAjuda">fechar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="container" id="container-modals">
 			
-			<div class="modal" tabindex="-1" role="dialog" id="modalAjuda">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title">Autora</h5>
-			        <button type="button" id = "closeAjuda" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			      	<img src="img/gira.png" class="float-left" id = "foto"/>
-			        <p>Arina de Jesus A. M. Sanches de Cabo Verde.</p>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" id ="fechar" class="btn btn-primary">fechar</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-
 			<div class="modal" tabindex="-1" role="dialog" id="modalMatricula">
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
@@ -170,26 +172,9 @@
 
 		</div>	
 
-		<!--<div class = "container">
-			<table class="table" id="tabela">
-			  <thead id = "Cabtabela">
-			    <tr>
-			      <th id = "mat" scope="col">Matrícula</th>
-			      <th id = "nomeT" scope="col">Nome</th>
-			      <th id = "acoes" scope="col">Ações</th>
-			    </tr>
-			  </thead>
-			    <tbody id = "tt">
-				    <tr>
-				      <td colspan="3">Sem registros de alunos</td>
-				    </tr>
-				</tbody>
-			</table>
-		</div>-->
-
 		<template id="table-alunos">
-				<table class="table">
-						<thead>
+				<table class="table" id="tabela">
+						<thead id = "Cabtabela">
 							<tr><th scope="col">Matrícula</th>
 								<th scope="col">Nome</th>
 								<th scope="col">Ações</th>
@@ -204,7 +189,6 @@
 						</tbody>
 				</table>
 		</template>
-
 
 		<script>
 
@@ -270,6 +254,9 @@
 	                fecharModal($event){
 	                	this.$refs.modalConf.style.display = "none";
 	                },
+	                fecharModalAjuda($event){
+	                	this.$refs.modalAjudaRef.style.display = "none";
+	                },
 	                removerAluno(matricula){
 	                	let indice = this.indiceAluno(matricula);
 						this.alunos.splice(indice, 1);
@@ -285,6 +272,10 @@
 							}
 						}
 						return indice;
+	                }, 
+	                abrirModalAjuda(){
+	                	let element = this.$refs.modalAjudaRef
+    					element.style.display = "block";
 	                }
 	            }
 			});
