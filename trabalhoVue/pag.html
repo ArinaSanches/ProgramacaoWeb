@@ -116,7 +116,7 @@
 					        <p>Deseja excluir o aluno?</p>
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" id ="removerOk" class="btn btn-primary" v-on:click="removerAluno">confirmar</button>
+					        <button type="button" id ="removerOk" class="btn btn-primary" ref="modalRemoverAluno">confirmar</button>
 					        <button type="button" id ="removerCancelar" class="btn btn-secondary" data-dismiss="modal" v-on:click="fecharModal">cancelar</button>
 					      </div>
 					    </div>
@@ -209,6 +209,7 @@
 		<script>
 
 	        let alunos = [];
+	        let matriculaDel;
 
 			Vue.component( 'table-alunos', {
 				template: "#table-alunos",
@@ -216,8 +217,9 @@
 				methods: {
 	                remover($event, matricula){
 	                	let element = app.$refs.modalConf
-	                	console.log(element)
-    					element.style.display = "block";    					
+    					element.style.display = "block"; 
+    					let elemento = app.$refs.modalRemoverAluno
+    					elemento.setAttribute('onclick',"app.removerAluno("+matricula+")");				
 	                }
 	            }
 			});
@@ -268,6 +270,22 @@
 	                fecharModal($event){
 	                	this.$refs.modalConf.style.display = "none";
 	                },
+	                removerAluno(matricula){
+	                	let indice = this.indiceAluno(matricula);
+						this.alunos.splice(indice, 1);
+						this.fecharModal()
+	                },
+	                indiceAluno(matricula){
+	                	var indice;
+						var i;
+						for(i = 0; i < this.alunos.length; i++){
+							if (this.alunos[i].matricula == matricula){
+								indice = i;
+								i = this.alunos.length;
+							}
+						}
+						return indice;
+	                }
 	            }
 			});
 		</script>	
