@@ -36,7 +36,7 @@
 							<div class="form-row">
 								<div class="form-group col-md-4">
 						  			<label for="inputMatricula">Matrícula</label>
-						  			<input type="text" v-model="matricula" class="form-control" id="inputMatricula" placeholder="Adicione a matrícula do aluno" required pattern="[0-9]{6}" maxlength=6>
+						  			<input type="text" v-model="matricula" class="form-control" id="inputMatricula" placeholder="Adicione a matrícula do aluno" required pattern="[0-9]{6}" maxlength=6 ref="inputMatriculaRef">
 								</div>
 								<div class="form-group col-md-8">
 						  			<label for="inputNome">Nome</label>
@@ -60,7 +60,7 @@
 								</div>
 								<div class="form-group col-md-4">
 						  			<label for="inputTelefone">Telefone</label>
-						  			<input type="text" v-model="telefone" class="form-control" id="inputTelefone" placeholder="Adicione o telefone do aluno" required pattern="^[0-9]{5}-([0-9]{3}|[0-9]{4})">
+						  			<input type="text" v-model="telefone" class="form-control" id="inputTelefone" placeholder="Adicione o telefone do aluno" required pattern="^[0-9]{5}([0-9]{3}|[0-9]{4})">
 								</div>
 								<div class="form-group col-md-1">
 								<label for="inputOperadora">Operadora</label>
@@ -136,7 +136,7 @@
 				      </div>
 				      <div class="modal-body">
 				      	<img src="img/gira.png" class="float-left" id = "foto"/>
-				        <p>Arina de Jesus A. M. Sanches de Cabo Verde.</p>
+				        <p>Arina de Jesus A. M. Sanches. Sou de Cabo Verde.</p>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" id ="fechar" class="btn btn-primary" data-dismiss="modal" v-on:click="fecharModalAjuda">fechar</button>
@@ -304,6 +304,7 @@
 
 						for(i = 0; i < alunos.length; i++){
 							if (alunos[i].matricula == this.matricula){
+								this.$refs.inputMatriculaRef.focus()
 								this.$refs.modalMatriculaRef.style.display = "block"
 								controle = "invalido";
 							}
