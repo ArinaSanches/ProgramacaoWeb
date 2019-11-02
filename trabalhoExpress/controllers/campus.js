@@ -4,6 +4,8 @@ module.exports.listaCampis = function(req, res){
     res.json(campis);
 }
 
+module.exports.campis = campis
+
 module.exports.obterCampi = function(req, res){
     var codigo = req.params.codigo;
     var campi = campis.find(campi => (campi.codigo == codigo));
