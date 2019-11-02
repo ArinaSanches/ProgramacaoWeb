@@ -5,5 +5,5 @@ module.exports = function(app){
     app.get("/api/alunos/:matricula", controller.obterAluno);
     app.post("/api/alunos", controller.addAluno);
     app.put("/api/alunos/:matricula", controller.updateAluno);
-    app.delete("/api/alunos/:matricula", controller.deleteAluno);
+    app.delete("/api/alunos/:matricula?", controller.deleteAluno);
 }

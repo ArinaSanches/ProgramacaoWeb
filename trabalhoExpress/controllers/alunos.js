@@ -1,12 +1,32 @@
-var alunos = [{_id:1, nome:"Joao",matricula:"123",campi:1, curso:"ciencia"}, {_id:
-    2,nome:"Pedro",matricula:"234",campi:"1", curso:"ciencia"}];
+var alunos = [{_id:1, nome:"Joao",matricula:"123",campi:1, curso:"engenharia", nascimento:"1994/04/19"}, {_id:
+    2,nome:"Pedro",matricula:"234",campi:"1", curso:"ciencia", nascimento:"1996/04/19"}, {_id:
+        2,nome:"Luisa",matricula:"567",campi:"1", curso:"ciencia", nascimento:"2001/04/6"},{_id:
+            2,nome:"Ana",matricula:"891",campi:"1", curso:"engenharia", nascimento:"2000/01/31"}];
 
 var controllerCampi =  require("./campus.js");
 
 module.exports.alunos = alunos
 
 module.exports.listaAlunos = function(req, res){
-    res.json(alunos);
+    var alunosSelecionados = alunos.slice();
+
+    if(req.query.curso){
+        var curso = req.query.curso;
+        alunosSelecionados = alunosSelecionados.filter((aluno) => (aluno.curso == curso));                        
+    }
+    if(req.query.campi){
+        var campi = req.query.campi;
+        alunosSelecionados = alunosSelecionados.filter((aluno) => (aluno.campi == campi));                        
+    }
+    if(req.query.min_data && req.query.max_data){
+
+        alunos.forEach((aluno) =>{
+            if(req.query.min_data <= aluno.nascimento && req.query.max_data >= aluno.nascimento){
+                console.log(aluno)
+            }
+        });
+    }
+    res.json(alunosSelecionados);
 }
 
 module.exports.obterAluno = function(req, res){
