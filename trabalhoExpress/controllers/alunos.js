@@ -3,6 +3,8 @@ var alunos = [{_id:1, nome:"Joao",matricula:"123",campi:1, curso:"ciencia"}, {_i
 
 var controllerCampi =  require("./campus.js");
 
+module.exports.alunos = alunos
+
 module.exports.listaAlunos = function(req, res){
     res.json(alunos);
 }

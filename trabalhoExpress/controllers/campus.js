@@ -1,10 +1,12 @@
 var campis = [{codigo:1, nome:"Pici", cursos:["ciencia", "engenharia"]}] 
 
+var controllerAlunos =  require("./alunos.js");
+
+module.exports.campis = campis
+
 module.exports.listaCampis = function(req, res){
     res.json(campis);
 }
-
-module.exports.campis = campis
 
 module.exports.obterCampi = function(req, res){
     var codigo = req.params.codigo;
@@ -65,6 +67,22 @@ module.exports.deleteCampi = function(req, res){
     if(campi){
         var index = campis.indexOf(campi)
         campis.splice(index, 1);
+
+        var alunos = controllerAlunos.alunos;
+        
+        aluno_del_indexes = []
+
+        alunos.forEach((aluno) => {
+            if(aluno.campi == campi.codigo){
+                aluno_del_indexes.push(aluno);
+            }
+        })
+
+        aluno_del_indexes.forEach((index)=> {
+            var i = alunos.indexOf(index);
+            alunos.splice(i, 1);
+        })
+
         res.status(200).send(campi);        
     }else{
         //ajeitar para o erro correto
