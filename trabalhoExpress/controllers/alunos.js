@@ -20,9 +20,9 @@ module.exports.listaAlunos = function(req, res){
     }
     if(req.query.min_data && req.query.max_data){
 
-        alunos.forEach((aluno) =>{
+        alunosSelecionados = alunosSelecionados.filter((aluno) =>{
             if(req.query.min_data <= aluno.nascimento && req.query.max_data >= aluno.nascimento){
-                console.log(aluno)
+                return aluno;
             }
         });
     }
