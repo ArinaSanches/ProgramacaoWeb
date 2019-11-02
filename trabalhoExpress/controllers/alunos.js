@@ -1,7 +1,5 @@
-var alunos = [{_id:1, nome:"Joao",matricula:"123",campi:1, curso:"engenharia", nascimento:"1994/04/19"}, {_id:
-    2,nome:"Pedro",matricula:"234",campi:"1", curso:"ciencia", nascimento:"1996/04/19"}, {_id:
-        2,nome:"Luisa",matricula:"567",campi:"1", curso:"ciencia", nascimento:"2001/04/6"},{_id:
-            2,nome:"Ana",matricula:"891",campi:"1", curso:"engenharia", nascimento:"2000/01/31"}];
+var alunos = [{nome:"Joao",matricula:"123",campi:1, curso:"engenharia", nascimento:"1994/04/19", email:"a@g.c", ddd:99, telefone:12345, operadora:"tim"},
+ {nome:"Pedro",matricula:"234",campi:"1", curso:"ciencia", nascimento:"1996/04/19", email:"b@g.c", ddd:99, telefone:12345, operadora:"oi"}];
 
 var controllerCampi =  require("./campus.js");
 
@@ -62,7 +60,9 @@ module.exports.addAluno = function(req, res){
 
 module.exports.updateAluno = function(req, res){
     dadosAluno = req.body;
-    var aluno = alunos.find(aluno => (aluno.matricula == dadosAluno.matricula));
+    var matricula = req.params.matricula;
+
+    var aluno = alunos.find(aluno => (aluno.matricula == matricula));
 
     if(aluno){
         var campis = controllerCampi.campis;
