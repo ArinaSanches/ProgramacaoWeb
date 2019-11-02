@@ -68,24 +68,10 @@ module.exports.deleteCampi = function(req, res){
         var index = campis.indexOf(campi)
         campis.splice(index, 1);
 
-        var alunos = controllerAlunos.alunos;
-        
-        aluno_del_indexes = []
-
-        alunos.forEach((aluno) => {
-            if(aluno.campi == campi.codigo){
-                aluno_del_indexes.push(aluno);
-            }
-        })
-
-        aluno_del_indexes.forEach((index)=> {
-            var i = alunos.indexOf(index);
-            alunos.splice(i, 1);
-        })
-
+        controllerAlunos.deletarAlunosCampi(campi.codigo);
+    
         res.status(200).send(campi);        
     }else{
-        //ajeitar para o erro correto
         res.status(404).send("Não existe campi cadastrado com esse codigo!");        
     } 
 

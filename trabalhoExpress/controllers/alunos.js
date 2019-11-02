@@ -5,8 +5,6 @@ var alunos = [{_id:1, nome:"Joao",matricula:"123",campi:1, curso:"engenharia", n
 
 var controllerCampi =  require("./campus.js");
 
-module.exports.alunos = alunos
-
 module.exports.listaAlunos = function(req, res){
     var alunosSelecionados = alunos.slice();
 
@@ -26,14 +24,14 @@ module.exports.listaAlunos = function(req, res){
             }
         });
     }
-    res.json(alunosSelecionados);
+    res.status(200).send(alunosSelecionados);
 }
 
 module.exports.obterAluno = function(req, res){
     var matricula = req.params.matricula;
     var aluno = alunos.find(aluno => (aluno.matricula == matricula));
     if(aluno){
-        res.json(aluno);
+        res.status(200).send(aluno);
     }else{
         res.status(404).send("Aluno não encontrado");
     }
@@ -75,6 +73,11 @@ module.exports.updateAluno = function(req, res){
                 aluno.nome = dadosAluno.nome;
                 aluno.campi = dadosAluno.campi;
                 aluno.curso = dadosAluno.curso;
+                aluno.nascimento = dadosAluno.nascimento;
+                aluno.email = dadosAluno.email;
+                aluno.ddd = dadosAluno.ddd;
+                aluno.telefone = dadosAluno.telefone;
+                aluno.operadora = dadosAluno.operadora;
                 res.status(200).send(aluno);
             }else{
                 res.status(404).send("Curso invalido! Aluno deve estar matriculado em curso existente no campus informado.");   
@@ -97,10 +100,19 @@ module.exports.deleteAluno = function(req, res){
         alunos.splice(index, 1);
         res.status(200).send(aluno);        
     }else{
-        //ajeitar para o erro correto
         res.status(404).send("Não existe aluno cadastrado com essa matricula!");        
     } 
 
+}
+
+module.exports.deletarAlunosCampi = function(campi){
+    
+    aluno_del_indexes = alunos.filter((aluno) => (aluno.campi == campi));
+
+    aluno_del_indexes.forEach((index)=> {
+        var i = alunos.indexOf(index);
+        alunos.splice(i, 1);
+    })
 }
 
 
