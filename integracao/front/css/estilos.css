@@ -1,0 +1,79 @@
+img {
+	width: 25px;
+	height: 25px;	
+    left: 100%;
+    top: 100%;
+    z-index: -1;
+
+}
+
+#foto{
+	margin-right: 5%;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+#btnRodape{
+	text-align: right;
+}
+
+#btnLimpar, #btnInserir{
+	background-color: #19CED4;
+	color: white;
+}
+
+.card{
+	border-color: #19CED4;
+	border-width: 2px;
+}
+
+#cabecalhoForm{
+	background-color: #19CED4;
+}
+
+#tabela{
+	margin-top : 5%;
+}
+
+#Cabtabela{
+	background-color: #19CED4;
+	color :white;
+}
+
+td{
+	color: #495057;
+}
+
+label{
+	color: #495057;
+}
+
+#mat{
+	width: 20%;
+	text-align: left;
+}
+
+#nomeT{
+	width: 40%;
+	text-align: left;
+}
+
+#acoes{
+	width: 40%;
+	text-align: left;
+}
+
+.btn-danger{
+	width : 75px; 
+	height : 30px;
+	text-align: center;
+	border-radius: 10%;
+	background-color: gray;
+	border-color: gray;
+}
+
+#container-modals, #removerOk, #removerCancelar, #fechar, #btnFechar{
+	background-color: #50B6E9;
+}
+
